@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Каталог автомобилей</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+</head>
+<body>
+<p>Количество автомобилей в каталоге: {{ object_list|length }} .</p>
+
+<table class="table table-striped">
+    <thead>
+    <tr><th scope="col">N</td><th scope="col">Производитель</td><th scope="col">Модель</td><th scope="col">Год</td><th scope="col">Коробка</td><th scope="col">Цвет</td></tr>
+    </thead>
+    <tbody>
+    {% for car in object_list %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ car.manufacturer }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.get_gearbox_display }}</td>
+        <td>{{ car.color }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<form action="{% url 'search_results' %}" method="get">
+    <input name="manu" type="text" placeholder="Manufacturer">
+    <input name="model" type="text" placeholder="Model">
+  </form>
+</div>
+</body>
+</html>
